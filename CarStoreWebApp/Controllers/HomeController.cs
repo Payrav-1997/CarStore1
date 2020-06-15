@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CarStoreWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarStoreWebApp.Controllers
 {
@@ -17,12 +18,13 @@ namespace CarStoreWebApp.Controllers
         {
             _logger = logger;
         }
-
+        //[Authorize]
         public IActionResult Index()
         {
+            var user = User.Identity;
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();

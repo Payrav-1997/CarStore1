@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CarStoreWebApp.Models
@@ -11,15 +13,14 @@ namespace CarStoreWebApp.Models
     {
         public DataContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
         protected virtual void OnModelCreateing(ModelBuilder model)
         {
             model.Entity<Status>().HasData(
@@ -49,7 +50,7 @@ namespace CarStoreWebApp.Models
             {
                 Id = 1,
                 Email = "admin@mail.ru",
-                Password = "1234",
+                Password = HashingPassword("1234"),
                 Role = roleAdmin
             };
             model.Entity<Role>().HasData(
@@ -57,6 +58,14 @@ namespace CarStoreWebApp.Models
                 roleUser
                 );
             model.Entity<User>().HasData(admin);
+
+        }
+        static public string HashingPassword(string password)
+        {
+            var data = Encoding.ASCII.GetBytes(password);
+            var md5 = new MD5CryptoServiceProvider();
+            var md5data = md5.ComputeHash(data);
+            return Convert.ToBase64String(md5data);
         }
     }
 }
