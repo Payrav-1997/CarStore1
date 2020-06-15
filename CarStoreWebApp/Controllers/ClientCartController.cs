@@ -28,8 +28,7 @@ namespace CarStoreWebApp.Controllers
             var product = await _context.Cars.FirstOrDefaultAsync(p => p.Id == id);
 
 
-
-            _context.Carts.Add(new Cart { Item = product.Id });
+            _context.Carts.Add(new Cart { Item =  product});
             await _context.SaveChangesAsync();
 
             return RedirectToAction("CartList");
@@ -37,11 +36,7 @@ namespace CarStoreWebApp.Controllers
 
         public async Task<IActionResult> CartList()
         {
-            var cartList = await _context.Carts.ToListAsync();
-            foreach (var cartProduct in cartList)
-            {
-                cartProduct.Cars = await _context.Cars.Where(p => p.Id == cartProduct.carId).ToListAsync();
-            }
+            var cartList = await _context.Carts.Include(u => u.Item).ToListAsync();
             return View(cartList);
         }
     }
