@@ -1,0 +1,43 @@
+﻿
+
+@model List<CarStoreWebApp.Models.Cart>
+
+<form asp-action="AddToCart" asp-controller="ClientCart" asp-antiforgery="true">
+    <table class="table table-active table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Img</td>
+                <td>Desciption</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model)
+            {
+                foreach (var product in cart?.Item)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>@product.Img</td>
+                        <td>@product.Desciption</td>                    
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+
+                @*<td colspan="3">Total: @Model.Select(p => p.Cars.Select(x => x.price).Sum()).Sum()</td>*@
+
+                <td><a asp-action="AddOrder" asp-controller="Order">AddOrder</a></td>
+            </tr>
+        </tfoot>
+
+    </table>
+</form>
+
+
