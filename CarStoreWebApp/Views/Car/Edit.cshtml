@@ -27,7 +27,31 @@
             <span asp-validation-for="Category.Id"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Desciption">Длинное описание</label>
+            <label asp-for="Model.Id">Модель</label>
+            <select asp-for="Model.Id">
+                @foreach (var x in ViewBag.Models)
+                {
+                    <option value="@x.Id">
+                        @x.Name
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="Model.Id"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status.Id">Статус</label>
+            <select asp-for="Model.Id">
+                @foreach (var x in ViewBag.Statuses)
+                {
+                    <option value="@x.Id">
+                        @x.Name
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="Status.Id"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Desciption">Описание</label>
             <input type="text" asp-for="Desciption" class="form-control" />
             <span asp-validation-for="Desciption"></span>
         </div>

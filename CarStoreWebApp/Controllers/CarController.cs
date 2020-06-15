@@ -93,10 +93,10 @@ namespace CarStoreWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Car model, int xid)
+        public async Task<IActionResult> Edit(Car model, int id)
         {
             var lastmodel = _context.Cars.Single(p => p.Id == model.Id);
-            var Category = _context.Categories.Single(p => p.Id == xid);
+            var Category = _context.Categories.Single(p => p.Id == id);
             var status = _context.Statuses.First(p=> p.Id == model.Status.Id);
             var Model = _context.Models.First(p=> p.Id == model.Model.Id);
             lastmodel.Name = model.Name;

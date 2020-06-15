@@ -8,8 +8,10 @@ namespace CarStoreWebApp.Models
 {
     public class Register
     {
+        [EmailAddress(ErrorMessage = "Некорректный адрес")]
+        [Required(ErrorMessage = "Не указан электронный адрес")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Некорректный пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Compare("Password",ErrorMessage ="Пароли не совпадают!")]

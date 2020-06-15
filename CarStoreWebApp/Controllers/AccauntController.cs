@@ -60,6 +60,7 @@ namespace CarStoreWebApp.Controllers
                     var role = context.Roles.First(t => t.Name == "User");
                     context.Users.Add(new User()
                     {
+                        
                         Email = model.Email,
                         Password = model.Password,
                         Role = role

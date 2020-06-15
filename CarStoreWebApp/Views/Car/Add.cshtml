@@ -1,7 +1,7 @@
 ﻿
 @model CarStoreWebApp.Models.Car
 
-<form asp-action="Add" asp-controller="CarModel" asp-antiforgery="true">
+<form asp-action="Add" asp-controller="Car" asp-antiforgery="true">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <div class="form-group">
@@ -15,7 +15,7 @@
             <span asp-validation-for="Price"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Desciption">Длинное описание</label>
+            <label asp-for="Desciption">Описание</label>
             <input type="text" asp-for="Desciption" class="form-control" />
             <span asp-validation-for="Desciption"></span>
         </div>            
