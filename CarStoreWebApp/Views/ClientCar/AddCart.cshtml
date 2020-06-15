@@ -16,16 +16,16 @@
         <tbody>
             @foreach (var cart in Model)
             {
-                foreach (var product in cart?.Item)
-                {
+                
                     <tr>
-                        <td>@product.Id</td>
-                        <td>@product.Name</td>
-                        <td>@product.Price</td>
-                        <td>@product.Img</td>
-                        <td>@product.Desciption</td>                    
+                        <td>@cart.Item.Id</td>
+                        <td>@cart.Item.Name</td>
+                        <td>@cart.Item.Price</td>
+                        <td>@cart.Item.Img</td>
+                        <td>@cart.Item.Desciption</td>
+                      
                     </tr>
-                }
+                
             }
         </tbody>
         <tfoot>

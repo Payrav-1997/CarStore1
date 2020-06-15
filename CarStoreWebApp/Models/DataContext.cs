@@ -21,6 +21,7 @@ namespace CarStoreWebApp.Models
         public DbSet<Model> Models { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Status> Statuses { get; set; }
         protected virtual void OnModelCreateing(ModelBuilder model)
         {
             model.Entity<Status>().HasData(

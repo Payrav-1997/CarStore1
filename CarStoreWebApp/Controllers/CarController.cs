@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CarStoreWebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,12 +42,19 @@ namespace CarStoreWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Add(Car model, int id)
+        public async Task<IActionResult> Add(Car model, int id, IFormFile file)
         {
+            string dirpath = Path.GetFullPath("wwwroot/img/");
+            string path = dirpath + file.FileName;
+            using (var stream = System.IO.File.Create(path))
+            {
+                file.CopyTo(stream);
+            }
+            model.Img = "/img/" + file.FileName;
             var Category = await _context.Categories.SingleAsync(c => c.Id == id);
-            model.Category = Category;
-            await _context.AddAsync(model);
-            await _context.SaveChangesAsync();
+            model.Category = Category;           
+            _context.Cars.Add(model);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -61,12 +70,24 @@ namespace CarStoreWebApp.Controllers
         public IActionResult Edit(int id)
         {
             var model = _context.Cars.Include(p => p.Category).Single(p => p.Id == id);
-            var li = _context.Categories.Where(p => p.Id == model.Category.Id).ToList();
+            var Catli = _context.Categories.Where(p => p.Id == model.Category.Id).ToList();
+            var Stali = _context.Statuses.Where(p=> p.Id == model.Status.Id).ToList();
+            var Modli = _context.Models.Where(p => p.Id == model.Model.Id).ToList();
             foreach (var x in _context.Categories.ToList())
             {
-                li.Add(x);
+                Catli.Add(x);
             }
-            ViewBag.Categories = li;
+            foreach (var x in _context.Statuses.ToList())
+            {
+                Stali.Add(x);
+            }
+            foreach (var x in _context.Models.ToList())
+            {
+                Modli.Add(x);
+            }
+            ViewBag.Categories = Catli;
+            ViewBag.Status = Stali;
+            ViewBag.Model = Modli;
             return View(model);
         }
 
@@ -76,11 +97,13 @@ namespace CarStoreWebApp.Controllers
         {
             var lastmodel = _context.Cars.Single(p => p.Id == model.Id);
             var Category = _context.Categories.Single(p => p.Id == xid);
+            var status = _context.Statuses.First(p=> p.Id == model.Status.Id);
+            var Model = _context.Models.First(p=> p.Id == model.Model.Id);
             lastmodel.Name = model.Name;
             lastmodel.Price = model.Price;
             lastmodel.Img = model.Img;
             lastmodel.Desciption = model.Desciption;
-            lastmodel.Status = Status;
+            lastmodel.Status = status;
             lastmodel.Model = Model;
             lastmodel.Category = Category;
             await _context.SaveChangesAsync();
