@@ -12,7 +12,7 @@ namespace CarStoreWebApp.Controllers
         {
             return View();
         }
-
+        //Для адресов покупателей 
         [HttpPost]
         public IActionResult AddOrder(string model)
         {

@@ -22,7 +22,7 @@ namespace CarStoreWebApp.Controllers
             var li = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
             return View(li);
         }
-
+        //Добавление в корзину
         public async Task<IActionResult> AddCart(int id)
         {
             var product = await _context.Cars.FirstOrDefaultAsync(p => p.Id == id);

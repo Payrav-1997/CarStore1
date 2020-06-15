@@ -24,6 +24,7 @@ namespace CarStoreWebApp.Models
         public DbSet<Status> Statuses { get; set; }
         protected virtual void OnModelCreateing(ModelBuilder model)
         {
+            //Добавляю статус машины
             model.Entity<Status>().HasData(
                 new Status
                 {
@@ -35,6 +36,7 @@ namespace CarStoreWebApp.Models
                     Id = 2,
                     Name = "Б/У"
                 });
+            //Добавляю роль админа и пользователя
             string AdminRole = "Admin";
             string UserRole = "User";
             Role roleAdmin = new Role()
@@ -60,7 +62,30 @@ namespace CarStoreWebApp.Models
                 );
             model.Entity<User>().HasData(admin);
 
+            //Добавляю модель машины
+            model.Entity<Category>().HasData(
+            new Category()
+            {
+                Id = 1,
+                Name = "Tesla"
+            },
+             new Category()
+             {
+                 Id = 2,
+                 Name = "Mercedes"
+             },
+            new Category()
+            {
+                Id = 3,
+                Name = "BMW"
+            },
+            new Category()
+            {
+                Id = 4,
+                Name = "Lada"
+            });
         }
+        //Захеширую пароль
         static public string HashingPassword(string password)
         {
             var data = Encoding.ASCII.GetBytes(password);
@@ -68,5 +93,7 @@ namespace CarStoreWebApp.Models
             var md5data = md5.ComputeHash(data);
             return Convert.ToBase64String(md5data);
         }
+
+
     }
 }

@@ -34,6 +34,7 @@ namespace CarStoreWebApp
                 });
             services.AddDbContext<DataContext>(opt =>
             {
+                //Подключаю база данных
                 opt.UseSqlServer("Data Source=localhost;Initial Catalog = CarsMarket;Integrated Security=True;");
             });
             

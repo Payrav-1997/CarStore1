@@ -21,6 +21,7 @@ namespace CarStoreWebApp.Controllers
         {
             this.context = context;
         }
+        ///Для входа в акаунт
         public IActionResult Login()
         {
             return View();
@@ -42,6 +43,7 @@ namespace CarStoreWebApp.Controllers
             }         
             return View(model);
         }
+        //Для регистрации
         public IActionResult Register()
         {
             return View();
@@ -73,7 +75,7 @@ namespace CarStoreWebApp.Controllers
             }
             return View(model);
         }
-
+        //Для хеширование
         static public string HashingPassword(string password)
         {
             var data = Encoding.ASCII.GetBytes(password);
@@ -91,6 +93,7 @@ namespace CarStoreWebApp.Controllers
             ClaimsIdentity id = new ClaimsIdentity(list, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(id));
         }
+        //Для выхода 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

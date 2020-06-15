@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarStoreWebApp.Controllers
 {
-    public class CarController : Admin
+    
+    public class CarController : Admin //Только для админа
     {
         public DataContext _context;
         public CarController(DataContext context)
@@ -37,10 +38,13 @@ namespace CarStoreWebApp.Controllers
         public IActionResult Add()
         {
             ViewBag.Categories = _context.Categories.ToList();
+            
+            ViewBag.Status = _context.Statuses.ToList();
+            ViewBag.Model = _context.Models.ToList();
             return View();
         }
 
-
+        //Добавление 
         [HttpPost]
         public async Task<IActionResult> Add(Car model, int id, IFormFile file)
         {
@@ -58,7 +62,7 @@ namespace CarStoreWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-
+        //Удаление
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -67,6 +71,7 @@ namespace CarStoreWebApp.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        //Изменение
         public IActionResult Edit(int id)
         {
             var model = _context.Cars.Include(p => p.Category).Single(p => p.Id == id);
