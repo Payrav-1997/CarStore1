@@ -1,10 +1,10 @@
 ﻿
-@model List<CarStoreWebApp.Models.Category>
+@model List<CarStoreWebApp.Models.Model>
 @{
     ViewData["Title"] = "CarStoer";
 }
 
-<a asp-action="Index" asp-controller="Category">Add</a>
+<a asp-action="Index" asp-controller="Model">Add</a>
 <table class="table table-active table-bordered table-hover">
     <thead>
         <tr>
@@ -17,10 +17,12 @@
         {
             <tr>
                 <td>@x.Id</td>
-                <td>@x.Name</td>               
-                <td><a asp-action="Delete" asp-controller="Category" asp-route-id="@x.Id" id="Delete">Удалить</a> <a asp-action="Edit" asp-controller="Category" asp-route-id="@x.Id">Изменить</a></td>
+                <td>@x.Name</td>
+                <td><a asp-action="Delete" asp-controller="Model" asp-route-id="@x.Id" id="Delete">Удалить</a> <a asp-action="Edit" asp-controller="Model" asp-route-id="@x.Id">Изменить</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+</h1>
 
