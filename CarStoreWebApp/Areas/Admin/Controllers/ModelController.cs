@@ -6,9 +6,9 @@ using CarStoreWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarStoreWebApp.Controllers
+namespace CarStoreWebApp.Areas.Admin.Controllers
 {
-    public class ModelController : Controller
+    public class ModelController : AdminBase
     {
         public DataContext _context;
         public ModelController(DataContext context)
@@ -18,16 +18,16 @@ namespace CarStoreWebApp.Controllers
         public IActionResult Index()
         {
 
-            var li = _context.Models.OrderByDescending(p => p).ToList();
-            return View(li);
+            var list = _context.Models.OrderByDescending(p => p).ToList();
+            return View(list);
         }
 
 
         [HttpPost]
-        public IActionResult Index(string category)
+        public IActionResult Index(string model)
         {
-            var li = _context.Models.OrderByDescending(p => p).Where(p => p.Name == category).ToList();
-            return View(li);
+            var list = _context.Models.Where(p => p.Name == model).OrderByDescending(p => p).ToList();
+            return View(list);
         }
         public IActionResult Add()
         {
@@ -37,7 +37,7 @@ namespace CarStoreWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult>Add(Model model)
+        public async Task<IActionResult> Add(Model model)
         {
 
             _context.Models.Add(model);
@@ -63,13 +63,12 @@ namespace CarStoreWebApp.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Category model, int id)
+        public async Task<IActionResult> Edit(Model model, int id)
         {
             var lastmodel = _context.Models.Single(p => p.Id == model.Id);
             lastmodel.Name = model.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
     }
 }

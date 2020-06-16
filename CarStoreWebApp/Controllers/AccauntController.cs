@@ -32,11 +32,15 @@ namespace CarStoreWebApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                model.Password = HashingPassword(model.Password);
-                User user = await context.Users.Include(t=>t.Role).FirstOrDefaultAsync(t => t.Email == model.Email && t.Password == model.Password);
+                //model.Password = HashingPassword(model.Password);
+                User user = await context.Users.Include(t=>t.Role).FirstOrDefaultAsync(t => t.Email == model.Email || t.Password == model.Password);
                 if(user != null)
                 {
                     await Authenticate(user.Email,user.Role.Name);
+                    if(user.Role.Name == "Admin")
+                    {
+                        return RedirectToAction("Index", "Car");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("","Логин или пароль не корректный!");
@@ -58,8 +62,8 @@ namespace CarStoreWebApp.Controllers
                 User user = await context.Users.Include(t => t.Role).FirstOrDefaultAsync(t => t.Email == model.Email);
                 if (user == null)
                 {
-
-                    var role = context.Roles.First(t => t.Name == "User");
+                    
+                    var role = await context.Roles.FirstAsync(t => t.Name == "User");
                     context.Users.Add(new User()
                     {
                         
@@ -83,6 +87,7 @@ namespace CarStoreWebApp.Controllers
             var md5data = md5.ComputeHash(data);
             return Convert.ToBase64String(md5data);
         }
+        //Аунтификация
         public async Task Authenticate(string email,string role)
         {
             List<Claim> list = new List<Claim>()
@@ -92,6 +97,7 @@ namespace CarStoreWebApp.Controllers
             };
             ClaimsIdentity id = new ClaimsIdentity(list, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(id));
+            
         }
         //Для выхода 
         public async Task<IActionResult> Logout()

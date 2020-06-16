@@ -99,6 +99,28 @@ namespace CarStoreWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Tesla"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Mercedes"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Lada"
+                        });
                 });
 
             modelBuilder.Entity("CarStoreWebApp.Models.Model", b =>
@@ -155,6 +177,18 @@ namespace CarStoreWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("CarStoreWebApp.Models.Status", b =>
@@ -170,6 +204,18 @@ namespace CarStoreWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Новый"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Б/У"
+                        });
                 });
 
             modelBuilder.Entity("CarStoreWebApp.Models.User", b =>

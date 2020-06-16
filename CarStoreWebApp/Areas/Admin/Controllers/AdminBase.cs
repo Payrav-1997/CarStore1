@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarStoreWebApp.Controllers
+namespace CarStoreWebApp.Areas.Admin.Controllers
 {
-    //Роль админа 
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class Admin : Controller
+    public class AdminBase:Controller
     {
-
     }
 }

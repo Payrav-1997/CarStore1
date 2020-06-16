@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarStoreWebApp.Controllers
+namespace CarStoreWebApp.Areas.Admin.Controllers
 {
-    
-    public class CarController : Admin //Только для админа
+
+    public class CarController : AdminBase //Только для админа
     {
         public DataContext _context;
         public CarController(DataContext context)
@@ -38,7 +38,7 @@ namespace CarStoreWebApp.Controllers
         public IActionResult Add()
         {
             ViewBag.Categories = _context.Categories.ToList();
-            
+
             ViewBag.Status = _context.Statuses.ToList();
             ViewBag.Model = _context.Models.ToList();
             return View();
@@ -46,7 +46,7 @@ namespace CarStoreWebApp.Controllers
 
         //Добавление 
         [HttpPost]
-        public async Task<IActionResult> Add(Car model, int id, IFormFile file)
+        public async Task<IActionResult> Add(Car model,int CId,int SId,int MId, IFormFile file)
         {
             string dirpath = Path.GetFullPath("wwwroot/img/");
             string path = dirpath + file.FileName;
@@ -55,8 +55,12 @@ namespace CarStoreWebApp.Controllers
                 file.CopyTo(stream);
             }
             model.Img = "/img/" + file.FileName;
-            var Category = await _context.Categories.SingleAsync(c => c.Id == id);
-            model.Category = Category;           
+            var Category = await _context.Categories.FirstAsync(c => c.Id == CId);
+            //var Model = await _context.Models.FirstAsync(c => c.Id == MId);
+            var Status = await _context.Statuses.FirstAsync(c => c.Id == SId);
+            model.Category = Category;
+            //model.Model = Model;
+            model.Status = Status;
             _context.Cars.Add(model);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -66,7 +70,7 @@ namespace CarStoreWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var model = await _context.Cars.SingleAsync(p => p.Id == id);
+            var model = await _context.Cars.FirstAsync(p => p.Id == id);
             _context.Remove(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -74,36 +78,46 @@ namespace CarStoreWebApp.Controllers
         //Изменение
         public IActionResult Edit(int id)
         {
-            var model = _context.Cars.Include(p => p.Category).Single(p => p.Id == id);
-            var Catli = _context.Categories.Where(p => p.Id == model.Category.Id).ToList();
-            var Stali = _context.Statuses.Where(p=> p.Id == model.Status.Id).ToList();
-            var Modli = _context.Models.Where(p => p.Id == model.Model.Id).ToList();
+            var model = _context.Cars.Include(p => p.Category).Include(p=>p.Status).Include(p=>p.Model).Single(p => p.Id == id);
+            var CategoryList = _context.Categories.Where(p => p.Id == model.Category.Id).ToList();
+            var StatusList = _context.Statuses.Where(p => p.Id == model.Status.Id).ToList();
+            var ModelList = _context.Models.Where(p => p.Id == model.Model.Id).ToList();
             foreach (var x in _context.Categories.ToList())
             {
-                Catli.Add(x);
+                CategoryList.Add(x);
             }
             foreach (var x in _context.Statuses.ToList())
             {
-                Stali.Add(x);
+                StatusList.Add(x);
             }
             foreach (var x in _context.Models.ToList())
             {
-                Modli.Add(x);
+                ModelList.Add(x);
             }
-            ViewBag.Categories = Catli;
-            ViewBag.Status = Stali;
-            ViewBag.Model = Modli;
+            ViewBag.Categories = CategoryList;
+            ViewBag.Status = StatusList;
+            ViewBag.Model = ModelList;
             return View(model);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Car model, int id)
+        public async Task<IActionResult> Edit(Car model, int id, IFormFile file)
         {
             var lastmodel = _context.Cars.Single(p => p.Id == model.Id);
+            if ("/img/" + file.FileName != lastmodel.Img)
+            {
+                string dirpath = Path.GetFullPath("wwwroot/img/");
+                string path = dirpath + file.FileName;
+                using (var stream = System.IO.File.Create(path))
+                {
+                    file.CopyTo(stream);
+                }
+                model.Img = "/img/" + file.FileName;
+            }
             var Category = _context.Categories.Single(p => p.Id == id);
-            var status = _context.Statuses.First(p=> p.Id == model.Status.Id);
-            var Model = _context.Models.First(p=> p.Id == model.Model.Id);
+            var status = _context.Statuses.First(p => p.Id == model.Status.Id);
+            var Model = _context.Models.First(p => p.Id == model.Model.Id);
             lastmodel.Name = model.Name;
             lastmodel.Price = model.Price;
             lastmodel.Img = model.Img;

@@ -67,6 +67,10 @@ namespace CarStoreWebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name:"admin",
+                    areaName:"Admin",
+                    pattern : "{controller=Car}/{action=Index}/{id?}");
             });
         }
     }

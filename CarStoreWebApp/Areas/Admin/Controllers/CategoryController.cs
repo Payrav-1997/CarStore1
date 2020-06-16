@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarStoreWebApp.Controllers
+namespace CarStoreWebApp.Areas.Admin.Controllers
 {
-    public class CategoryController : Admin
+    public class CategoryController : AdminBase
     {
         public DataContext _context;
         public CategoryController(DataContext context)
@@ -19,16 +19,16 @@ namespace CarStoreWebApp.Controllers
         public IActionResult Index()
         {
            
-            var li = _context.Categories.OrderByDescending(p => p).Include(p => p.Name).ToList();
-            return View(li);
+            var list = _context.Categories.OrderByDescending(p => p).ToList();
+            return View(list);
         }
 
 
         [HttpPost]
         public IActionResult Index(string category)
         {
-            var li = _context.Categories.OrderByDescending(p => p).Include(p => p.Name).Where(p => p.Name == category).ToList();
-            return View(li);
+            var list = _context.Categories.Where(p => p.Name == category).OrderByDescending(p => p).ToList();
+            return View(list);
         }
         public IActionResult Add()
         {
@@ -57,7 +57,7 @@ namespace CarStoreWebApp.Controllers
         }
         public IActionResult Edit(int id)
         {
-            var model = _context.Categories.Include(p => p.Name).Single(p => p.Id == id);
+            var model = _context.Categories.Single(p => p.Id == id);
         
             return View(model);
         }

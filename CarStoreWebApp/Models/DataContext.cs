@@ -22,7 +22,7 @@ namespace CarStoreWebApp.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        protected virtual void OnModelCreateing(ModelBuilder model)
+        protected override void OnModelCreating(ModelBuilder model)
         {
             //Добавляю статус машины
             model.Entity<Status>().HasData(
@@ -49,18 +49,10 @@ namespace CarStoreWebApp.Models
                 Id = 2,
                 Name = UserRole
             };
-            User admin = new User()
-            {
-                Id = 1,
-                Email = "admin@mail.ru",
-                Password = HashingPassword("1234"),
-                Role = roleAdmin
-            };
             model.Entity<Role>().HasData(
                 roleAdmin,
                 roleUser
                 );
-            model.Entity<User>().HasData(admin);
 
             //Добавляю модель машины
             model.Entity<Category>().HasData(
@@ -84,14 +76,6 @@ namespace CarStoreWebApp.Models
                 Id = 4,
                 Name = "Lada"
             });
-        }
-        //Захеширую пароль
-        static public string HashingPassword(string password)
-        {
-            var data = Encoding.ASCII.GetBytes(password);
-            var md5 = new MD5CryptoServiceProvider();
-            var md5data = md5.ComputeHash(data);
-            return Convert.ToBase64String(md5data);
         }
 
 

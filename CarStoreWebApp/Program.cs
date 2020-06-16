@@ -18,19 +18,21 @@ namespace CarStoreWebApp
         {
             //CreateHostBuilder(args).Build().Run();
             var host = CreateHostBuilder(args).Build();
-            using(var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var context = services.GetService<DataContext>();
                 try
                 {
-                    var context = services.GetService<DataContext>();
                     context.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    
+
                 }
+                InitialAdmin.Admin(context);
+               
             }
             host.Run();
         }
@@ -41,6 +43,6 @@ namespace CarStoreWebApp
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-        
+
     }
 }
