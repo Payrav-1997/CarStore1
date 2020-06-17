@@ -35,7 +35,7 @@
         <div class="form-group">
             <label asp-for="Model.Id">Модель</label>
             <select asp-for="Model.Id">
-                @foreach (var x in ViewBag.Models)
+                @foreach (var x in ViewBag.Model)
                 {
                     <option value="@x.Id">
                         @x.Name
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label asp-for="Status.Id">Статус</label>
             <select asp-for="Model.Id">
-                @foreach (var x in ViewBag.Statuses)
+                @foreach (var x in ViewBag.Status)
                 {
                     <option value="@x.Id">
                         @x.Name
@@ -62,7 +62,7 @@
             <span asp-validation-for="Desciption"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Add" class="form-control btn" />
+            <input type="submit" value="Добавить" class="form-control btn" />
         </div>
     </div>
 </form>

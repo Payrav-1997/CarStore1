@@ -21,8 +21,8 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             ViewBag.Categories = _context.Categories.ToList();
-            var li = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
-            return View(li);
+            var list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
+            return View(list);
         }
 
 
@@ -30,10 +30,9 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         public IActionResult Index(string category)
         {
             ViewBag.Categories = _context.Categories.ToList();
-            var li = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).Where(p => p.Category.Name == category).ToList();
-            if (category == "Машины")
-                li = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
-            return View(li);
+            var list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).Where(p => p.Category.Name == category).ToList();
+                list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
+            return View(list);
         }
         public IActionResult Add()
         {
@@ -56,10 +55,10 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             }
             model.Img = "/img/" + file.FileName;
             var Category = await _context.Categories.FirstAsync(c => c.Id == CId);
-            //var Model = await _context.Models.FirstAsync(c => c.Id == MId);
+            var Model = await _context.Models.FirstAsync(c => c.Id == MId);
             var Status = await _context.Statuses.FirstAsync(c => c.Id == SId);
             model.Category = Category;
-            //model.Model = Model;
+            model.Model = Model;
             model.Status = Status;
             _context.Cars.Add(model);
             _context.SaveChanges();

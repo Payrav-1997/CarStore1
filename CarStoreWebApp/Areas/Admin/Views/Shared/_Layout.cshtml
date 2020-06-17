@@ -25,7 +25,13 @@
                         <a class="nav-link" href="/">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Cars/List">Машины</a>
+                        <a class="nav-link" href="/Car/Index">Добавление</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Category/Index">Категория</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Model/Index">Модель</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -33,22 +39,10 @@
                 </form>
             </div>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    @if (User.Identity.IsAuthenticated)
-                    {
+                <ul class="navbar-nav">               
                         <li>
                             <a class="nav-link" href="Accaunt/Logout">Выйти</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a class="nav-link" href="Accaunt/Login">Войти</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="Accaunt/Register">Регистрация</a>
-                        </li>
-                    }
+                        </li>                                   
                 </ul>
             </div>
         </nav>
@@ -56,8 +50,7 @@
     <div class="container mt-5">
         @RenderBody()
     </div>
-    <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
+    <footer class="container">       
         <p>© 2020 Все права зищищены · <a href="#"></a></p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -42,7 +42,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         {
           
             _context.Categories.Add(model);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

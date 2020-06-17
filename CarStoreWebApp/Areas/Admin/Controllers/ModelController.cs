@@ -17,12 +17,9 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-
             var list = _context.Models.OrderByDescending(p => p).ToList();
             return View(list);
         }
-
-
         [HttpPost]
         public IActionResult Index(string model)
         {
@@ -34,39 +31,31 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             ViewBag.Models = _context.Models.ToList();
             return View();
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> Add(Model model)
+        public async Task<IActionResult> Add(Model models)
         {
-
-            _context.Models.Add(model);
-            _context.SaveChanges();
+            _context.Models.Add(models);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult>Delete(int id)
         {
             var model = await _context.Models.SingleAsync(p => p.Id == id);
             _context.Remove(model);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");     
         }
-        public IActionResult Edit(int id)
+        public IActionResult Edit (int id)
         {
             var model = _context.Models.Single(p => p.Id == id);
-
             return View(model);
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> Edit(Model model, int id)
+        public async Task<IActionResult> Edit(Model model,int id)
         {
-            var lastmodel = _context.Models.Single(p => p.Id == model.Id);
-            lastmodel.Name = model.Name;
+            var lastModel = _context.Models.Single(p => p.Id == model.Id);
+            lastModel.Name = model.Name;
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
