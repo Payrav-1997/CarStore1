@@ -8,9 +8,10 @@ namespace CarStoreWebApp.Models
 {
     public class Register
     {
-        [EmailAddress(ErrorMessage = "Некорректный адрес")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
         [Required(ErrorMessage = "Не указан электронный адрес")]
         public string Email { get; set; }
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8 до 20 символов")]
         [Required(ErrorMessage = "Некорректный пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

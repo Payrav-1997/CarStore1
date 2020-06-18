@@ -54,7 +54,7 @@ namespace CarStoreWebApp.Controllers
             var cartList = await _context.Carts.Include(u => u.Item).ToListAsync();
             return View(cartList);
         }
-        //Удаление
+        //Удаление из корзины
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
