@@ -1,10 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<CarStoreWebApp.Models.Car>
+<body>
+    <script>
+        function AddToCart(id) {
+            $.post("/ClientCart/AddCart", { id: id })
+                .done(function (data) {
+                    alert("Ваш товар успешно был добавлен в карзину!");
+                })
+        }
+    </script>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>Модель</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Добавление</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td><a asp-controller="ClientAvto" asp-action="GetOnly" asp-route-id="@x.Id"><img src="@x.Img" style="width:150px;" /></a></td>
+                    <td>@x.Model.Name</td>
+                    <td>@x.Category.Name @x.Name</td>
+                    <td>@x.Price сом</td>
+                    <td><button onclick="AddToCart(@x.Id)" class=" btn  btn-success">Добавить в корзину</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
 
-<div class="text-center">
-    <h1 class="display-4">О компании</h1>
-    <h3>
-         
-    </h3>
-</div>

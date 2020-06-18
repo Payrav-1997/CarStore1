@@ -1,0 +1,59 @@
+﻿@model List<CarStoreWebApp.Models.Cart>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Оформить заказ
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-action="AddOrder" asp-controller="Order">
+                <div class="container">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" name="Name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Номер</label>
+                        <input type="number" name="Phone" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Адресс</label>
+                        <input type="text" name="Adress" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn form-control btn-success" value="Оформить"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Имя</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Удаление</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+
+            <tr>
+                <td><img src="@x.Item.Img" style="width:150px" /></td>
+                <td>@x.Item.Category@x.Item.Name</td>
+                <td>@x.Caunt</td>
+                <td>@x.Item.Price сом</td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-controller="ClientCart" asp-route-id="@x.Id" id="Delete">Удалить</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

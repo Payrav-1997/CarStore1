@@ -16,19 +16,18 @@ namespace CarStoreWebApp.Controllers
             this._context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> List()
-        {
-            var list = await _context.Cars.ToListAsync();
-            return View(list);
-        }
-
-        [HttpPost]
         public IActionResult List(string category)
         {
             ViewBag.Categories = _context.Categories.ToList();
             var list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).Where(p => p.Category.Name == category).ToList();
             list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
             return View(list);
+        }
+        [HttpGet]
+        public IActionResult GetOnly(int id)
+        {
+            var car = _context.Cars.Include(c=>c.Status).Include(c=>c.Model).First(c=> c.Id == id);
+            return View(car);
         }
     }
 }

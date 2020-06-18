@@ -17,7 +17,6 @@ C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStore
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStoreWebApp.TagHelpers.output.cache
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStoreWebApp.RazorCoreGenerate.cache
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -142,8 +141,6 @@ C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStore
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStoreWebApp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Accaunt\Login.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Accaunt\Register.cshtml.g.cs
-C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClientCar\AddCart.cshtml.g.cs
-C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Order\AddOrder.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\Add.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\Edit.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\Index.cshtml.g.cs
@@ -159,3 +156,9 @@ C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Ar
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Model\Edit.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Model\Index.cshtml.g.cs
 C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\CarStoreWebApp.csprojAssemblyReference.cache
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClientAvto\GetOnly.cshtml.g.cs
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClientCart\AddCart.cshtml.g.cs
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClientCart\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Order\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClientCart\OrderVerification.cshtml.g.cs
+C:\Users\LENOVO\Desktop\CarStore\CarStoreWebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\GetOrders.cshtml.g.cs

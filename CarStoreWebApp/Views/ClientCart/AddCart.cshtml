@@ -1,0 +1,35 @@
+﻿
+@model CarStoreWebApp.Models.Cart
+
+<form asp-action="AddCart" asp-controller="ClientCart" asp-antiforgery="true">
+    <table class="table table-active table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>Фотография</td>
+                <td>ID</td>
+                <td>Название</td>
+                <td>Цена</td>
+                <td>Описание</td>
+                
+
+            </tr>
+        </thead>
+        <tbody>                                 
+            <tr>
+                <td><img src="@Model.Item.Img" style="width:150px;" /></td>
+                <td>@Model.Item.Id</td>
+                <td>@Model.Item.Name</td>
+                <td>@Model.Item.Price</td>
+                <td>@Model.Item.Desciption</td>
+            </tr>                         
+        </tbody>
+        <tfoot>
+            <tr>
+               @*<td colspan="3">Total: @Model.Select(p => p.Item.Select(x => x.price).Sum()).Sum()</td>*@              
+            </tr>
+        </tfoot>
+
+    </table>
+</form>
+
+

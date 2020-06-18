@@ -15,49 +15,37 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Вип автосалон</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" style="width:100%" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Главная</a>
+                        <a class="nav-link"asp-action="Index"asp-controller="Home">Главный</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Car/Index">Админ</a>
+                        <a class="nav-link" asp-action="Index"asp-controller="Car">Админ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Car/Index">Админ</a>
+                        <a class="nav-link" asp-action="Index"asp-controller="ClientCart">Корзина</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Про нас</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/ClientCart/AddCart">Корзина</a>
-                    </li>
-
-
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link" href="#">Наши контакты</a>
-                </form>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            <a class="nav-link" href="Accaunt/Logout">Выйти</a>
+                            <a class="nav-link" asp-action="Logout"asp-controller="Accaunt">Выйти</a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a class="nav-link" href="Accaunt/Login">Войти</a>
+                            <a class="nav-link" asp-action="Login"asp-controller="Accaunt">Войти</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Accaunt/Register">Регистрация</a>
+                            <a class="nav-link" asp-action="Register"asp-controller="Accaunt">Регистрация</a>
                         </li>
                     }
                 </ul>
@@ -68,8 +56,6 @@
         @RenderBody()
     </div>
     <footer class="container">
-        <p class="float-right"><a href="#">Back to top</a></p>
-        <p>© 2020 Все права зищищены · <a href="#"></a></p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

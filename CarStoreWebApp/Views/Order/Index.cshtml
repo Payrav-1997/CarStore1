@@ -1,0 +1,24 @@
+﻿@model List<CarStoreWebApp.Models.Order>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Имя</th>
+            <th>Количество</th>
+            <th>Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td><img src="@x.Item.Item.Img" style="width:150px" /></td>
+                <td>@x.Item.Item.Category@x.Item.Item.Name</td>
+                <td>@x.Item.Caunt</td>
+                <td>@x.Item.Item.Price сом</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,28 @@
+﻿@model CarStoreWebApp.Models.Car
+
+<div class="row">
+    <div class="col">
+        <img src="@Model.Img" style="width:500px;" />
+    </div>
+    <div class="col">
+        <div class="container">
+            <div class="form-group">
+                <b style="font-size:17px">Модель:</b>  @Model.Model.Name
+            </div>
+            <div class="form-group">
+                <b style="font-size:17px">Статус:</b> @Model.Status.Name
+            </div>
+            <div class="form-group">
+                <p>
+                    <b style="font-size:17px">Описание:</b>  @Model.Desciption
+                </p>
+            </div>
+            <div class="form-group">
+                <b style="font-size:17px">Цена:</b> @Model.Price сом
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

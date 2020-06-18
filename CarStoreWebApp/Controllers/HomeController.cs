@@ -7,22 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CarStoreWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarStoreWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public DataContext _context;
+        public HomeController(DataContext context)
         {
-            _logger = logger;
+            this._context = context;
         }
         //[Authorize]
         public IActionResult Index()
         {
-            var user = User.Identity;
-            return View();
+            var list = _context.Cars.Include(a=>a.Model).Include(a=>a.Category).ToList();
+            return View(list);
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Privacy()

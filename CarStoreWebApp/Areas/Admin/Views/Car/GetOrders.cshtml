@@ -1,0 +1,30 @@
+﻿@model List<Order>
+<table class="table table-active table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Фото</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Имя покупателя</td>
+            <td>Номер покупателя</td>
+            <td>Адресс покупателя</td>
+            <td>Удаление</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Item in Model)
+        {
+        <tr>
+            <td>@Item.Id</td>
+            <td><img src="@Item.Item.Item.Img" style="width:150px;" /></td>
+            <td>@Item.Item.Item.Name</td>
+            <td>@Item.Item.Item.Price</td>
+            <td>@Item.Name</td>
+            <td>@Item.Phone</td>
+            <td>@Item.Adress</td>
+            <td><a class="btn btn-danger"href="/Car/DeleteOrder?id=@Item.Id">Удалить</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

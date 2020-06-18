@@ -4,40 +4,68 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarStoreWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarStoreWebApp.Controllers
 {
-    public class ClientCarController : Controller
+    public class ClientCartController : Controller
     {
         public DataContext _context;
-        public ClientCarController(DataContext context)
+        public ClientCartController(DataContext context)
         {
             this._context = context;
         }
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.Categories = _context.Categories.ToList();
-            var li = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
-            return View(li);
+            // ViewBag.Categories = _context.Categories.ToList();
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Register", "Accaunt");
+            }
+            else
+            {
+                var list = _context.Carts.OrderByDescending(p => p).Include(p => p.Item).Where(c => c.IsOrdered == false && c.Orderer.Email == User.Identity.Name).ToList();
+                return View(list);
+            }
         }
         //Добавление в корзину
-        public async Task<IActionResult> AddCart(int id)
+        public IActionResult AddCart(int id)
         {
-            var product = await _context.Cars.FirstOrDefaultAsync(p => p.Id == id);
-
-
-            _context.Carts.Add(new Cart { Item =  product});
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("CartList");
+            var product = _context.Cars.FirstOrDefault(p => p.Id == id);
+            string email = User.Identity.Name;
+            var orderer = _context.Users.Where(p => p.Email == email).FirstOrDefault();
+            if (_context.Carts.Any(p => p.Item.Id == product.Id))
+            {
+                var x = _context.Carts.Where(p => p.Item.Id == id).FirstOrDefault();
+                x.Caunt++;
+                _context.Entry(x).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            _context.Carts.Add(new Cart { Item = product, Caunt = 1, Orderer = orderer, IsOrdered = false });
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> CartList()
         {
-            var cartList = await _context.Carts.Include(u => u.Item).ToListAsync();
+            var cartList = await _context.Carts.Include(u => u.Item).Where(c => c.IsOrdered == false).ToListAsync();
             return View(cartList);
+        }
+        //Удаление
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _context.Carts.FirstAsync(p => p.Id == id);
+            _context.Remove(model);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        public IActionResult OrderVerification()
+        {
+            return View();
         }
     }
 }

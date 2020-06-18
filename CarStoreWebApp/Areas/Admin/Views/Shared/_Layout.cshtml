@@ -14,8 +14,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Вип автосалон</a>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">        
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,23 +24,23 @@
                         <a class="nav-link" href="/">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Car/Index">Добавление</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Car">Добавление</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Category/Index">Категория</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Category">Категория</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Model/Index">Модель</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Model">Модель</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="GetOrders" asp-controller="Car">Просмотр Заказов</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link" href="#">Наши контакты</a>
-                </form>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">               
                         <li>
-                            <a class="nav-link" href="Accaunt/Logout">Выйти</a>
+                            <a class="nav-link"asp-action="Logout"asp-controller="Accaunt">Выйти</a>
                         </li>                                   
                 </ul>
             </div>
@@ -51,7 +50,6 @@
         @RenderBody()
     </div>
     <footer class="container">       
-        <p>© 2020 Все права зищищены · <a href="#"></a></p>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

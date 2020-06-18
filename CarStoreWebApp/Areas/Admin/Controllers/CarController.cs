@@ -127,6 +127,16 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
+        public IActionResult GetOrders()
+        {
+            var list = _context.Orders.Include(p=>p.Item).Include(p=>p.Item.Item).ToList();
+            return View(list);
+        }
+        public IActionResult DeleteOrder(int id)
+        {
+            _context.Orders.Remove(_context.Orders.Where(p => p.Id == id).FirstOrDefault());
+            _context.SaveChanges();
+            return RedirectToAction("GetOrders","Car");
+        }
     }
 }
