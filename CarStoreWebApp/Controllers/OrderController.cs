@@ -29,7 +29,7 @@ namespace CarStoreWebApp.Controllers
             foreach (var x in Items)
             {
                 var item = await _context.Carts.FirstAsync(c=>c == x);
-                item.IsOrdered = true;
+           
                 _context.Orders.Add(new Order()
                 {
                     Item = x,

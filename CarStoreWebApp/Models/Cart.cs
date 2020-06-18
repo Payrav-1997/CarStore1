@@ -11,6 +11,5 @@ namespace CarStoreWebApp.Models
         public int Caunt { get; set; }
         public User Orderer { get; set; }
         public Car Item { get; set; }
-        public bool IsOrdered { get; set; }
     }
 }

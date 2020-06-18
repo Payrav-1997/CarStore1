@@ -19,14 +19,14 @@ namespace CarStoreWebApp.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            // ViewBag.Categories = _context.Categories.ToList();
+            
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Register", "Accaunt");
             }
             else
             {
-                var list = _context.Carts.OrderByDescending(p => p).Include(p => p.Item).Where(c => c.IsOrdered == false && c.Orderer.Email == User.Identity.Name).ToList();
+                var list = _context.Carts.OrderByDescending(p => p).Include(p => p.Item).Where(c => c.Orderer.Email == User.Identity.Name).ToList();
                 return View(list);
             }
         }
@@ -44,14 +44,14 @@ namespace CarStoreWebApp.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            _context.Carts.Add(new Cart { Item = product, Caunt = 1, Orderer = orderer, IsOrdered = false });
+            _context.Carts.Add(new Cart { Item = product, Caunt = 1, Orderer = orderer});
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> CartList()
         {
-            var cartList = await _context.Carts.Include(u => u.Item).Where(c => c.IsOrdered == false).ToListAsync();
+            var cartList = await _context.Carts.Include(u => u.Item).ToListAsync();
             return View(cartList);
         }
         //Удаление

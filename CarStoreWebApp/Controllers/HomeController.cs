@@ -18,12 +18,13 @@ namespace CarStoreWebApp.Controllers
         {
             this._context = context;
         }
-        //[Authorize]
+        
         public IActionResult Index()
         {
             var list = _context.Cars.Include(a=>a.Model).Include(a=>a.Category).ToList();
             return View(list);
         }
+        //Только для админа
         [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {

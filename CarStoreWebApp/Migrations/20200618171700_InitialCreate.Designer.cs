@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarStoreWebApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200616085659_InitialCreate")]
+    [Migration("20200618171700_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,9 +69,6 @@ namespace CarStoreWebApp.Migrations
 
                     b.Property<int>("Caunt")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsOrdered")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("ItemId")
                         .HasColumnType("int");

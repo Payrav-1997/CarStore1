@@ -15,6 +15,7 @@ namespace CarStoreWebApp.Controllers
         {
             this._context = context;
         }
+        //Для вывода машин на экран
         [HttpGet]
         public IActionResult List(string category)
         {

@@ -26,6 +26,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             var list = _context.Models.Where(p => p.Name == model).OrderByDescending(p => p).ToList();
             return View(list);
         }
+        //Добавление моделя
         public IActionResult Add()
         {
             ViewBag.Models = _context.Models.ToList();
@@ -38,6 +39,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        //Удаление моделя
         [HttpGet]
         public async Task<IActionResult>Delete(int id)
         {
@@ -46,6 +48,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");     
         }
+        //Изменение моделя
         public IActionResult Edit (int id)
         {
             var model = _context.Models.Single(p => p.Id == id);

@@ -54,7 +54,7 @@ namespace CarStoreWebApp.Models
                 roleUser
                 );
 
-            //Добавляю модель машины
+            //Добавляю категорию машины
             model.Entity<Category>().HasData(
             new Category()
             {
@@ -76,6 +76,24 @@ namespace CarStoreWebApp.Models
                 Id = 4,
                 Name = "Lada"
             });
+            //Добавляю модель машины
+            model.Entity<Model>().HasData(
+           new Model()
+           {
+               Id = 1,
+               Name = "Легковая"
+           },
+            new Model()
+            {
+                Id = 2,
+                Name = "Грузовая"
+            },
+           new Model()
+           {
+               Id = 3,
+               Name = "Электрический"
+           });
+          
         }
 
 

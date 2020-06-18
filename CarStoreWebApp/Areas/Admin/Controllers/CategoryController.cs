@@ -36,7 +36,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             return View();
         }
 
-
+        //Добавление категории
         [HttpPost]
         public async Task<IActionResult> Add(Category model)
         {
@@ -46,7 +46,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
+        //Удаление категории
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -55,6 +55,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        //Изменение категории
         public IActionResult Edit(int id)
         {
             var model = _context.Categories.Single(p => p.Id == id);

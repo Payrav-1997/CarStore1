@@ -43,7 +43,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             return View();
         }
 
-        //Добавление 
+        //Добавление машины
         [HttpPost]
         public async Task<IActionResult> Add(Car model,int CId,int SId,int MId, IFormFile file)
         {
@@ -65,7 +65,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        //Удаление
+        //Удаление машины
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
@@ -74,7 +74,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        //Изменение
+        //Изменение машины
         public IActionResult Edit(int id)
         {
             var model = _context.Cars.Include(p => p.Category).Include(p=>p.Status).Include(p=>p.Model).Single(p => p.Id == id);
@@ -127,11 +127,13 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        //Для Покупки
         public IActionResult GetOrders()
         {
             var list = _context.Orders.Include(p=>p.Item).Include(p=>p.Item.Item).ToList();
             return View(list);
         }
+        //Для удаение покупки
         public IActionResult DeleteOrder(int id)
         {
             _context.Orders.Remove(_context.Orders.Where(p => p.Id == id).FirstOrDefault());

@@ -32,7 +32,7 @@ namespace CarStoreWebApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                //model.Password = HashingPassword(model.Password);
+               
                 User user = await context.Users.Include(t=>t.Role).FirstOrDefaultAsync(t => t.Email == model.Email || t.Password == model.Password);
                 if(user != null)
                 {

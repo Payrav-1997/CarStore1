@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarStoreWebApp.Areas.Admin.Controllers
 {
+    
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class AdminBase:Controller

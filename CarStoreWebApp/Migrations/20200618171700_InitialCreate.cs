@@ -124,8 +124,7 @@ namespace CarStoreWebApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Caunt = table.Column<int>(nullable: false),
                     OrdererId = table.Column<int>(nullable: true),
-                    ItemId = table.Column<int>(nullable: true),
-                    IsOrdered = table.Column<bool>(nullable: false)
+                    ItemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -21,31 +21,42 @@
             <div class="collapse navbar-collapse" style="width:100%" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link"asp-action="Index"asp-controller="Home">Главный</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Home">Главный</a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn brytn-seconda dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Категория
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Легковая</a>
+                            <a class="dropdown-item" href="#">Грузовая</a>
+                            <a class="dropdown-item" href="#">Электрический</a>
+                        </div>
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Car">Админ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-action="Index"asp-controller="Car">Админ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-action="Index"asp-controller="ClientCart">Корзина</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="ClientCart">Корзина</a>
                     </li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse">
+               
                 <ul class="navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            <a class="nav-link" asp-action="Logout"asp-controller="Accaunt">Выйти</a>
+                            <a class="nav-link" asp-action="Logout" asp-controller="Accaunt">Выйти</a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a class="nav-link" asp-action="Login"asp-controller="Accaunt">Войти</a>
+                            <a class="nav-link" asp-action="Login" asp-controller="Accaunt">Войти</a>
                         </li>
                         <li>
-                            <a class="nav-link" asp-action="Register"asp-controller="Accaunt">Регистрация</a>
+                            <a class="nav-link" asp-action="Register" asp-controller="Accaunt">Регистрация</a>
                         </li>
                     }
                 </ul>
