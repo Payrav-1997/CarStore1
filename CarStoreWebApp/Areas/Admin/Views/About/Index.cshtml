@@ -1,0 +1,27 @@
+﻿@model List<CarStoreWebApp.Models.AboutModel>
+@{ ViewBag["Title"] = "CarStore";}
+ 
+<a class="btn btn-dark" asp-action="Add"asp-controller="About">Добавить</a>
+<table class="table table-active table-bordered table-hover">
+    <thead>
+        <tr>
+            <td><d>ID</d></td>
+            <td><d>Адресс</d></td>
+            <td><d>Почта</d></td>
+            <td><d>Номер телефона</d></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Adress</td>
+            <td>@item.Email</td>
+            <td>@item.Phone</td>
+            <td><a class="btn btn-danger"asp-action="Delete"asp-controller="About"asp-route-id="@item.Id"id="Delete">Удалить</a><a class="btn btn-primary"asp-action="Edit"asp-controller="About" asp-route-id="@item.Id">Изменить</a></td>
+        </tr>
+        }       
+    </tbody>
+
+</table>

@@ -66,6 +66,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         public async Task<IActionResult>Edit(AboutModel model,int id)
         {
             var lastModel = _context.Abouts.Single(p => p.Id == model.Id);
+            lastModel.Adress = model.Adress;
             lastModel.Email = model.Email;
             lastModel.Phone = model.Phone;
             await _context.SaveChangesAsync();
