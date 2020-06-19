@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarStoreWebApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200618171700_InitialCreate")]
+    [Migration("20200618193807_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,6 +135,23 @@ namespace CarStoreWebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Models");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Легковая"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Грузовая"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Электрический"
+                        });
                 });
 
             modelBuilder.Entity("CarStoreWebApp.Models.Order", b =>
@@ -154,7 +171,8 @@ namespace CarStoreWebApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.HasKey("Id");
 

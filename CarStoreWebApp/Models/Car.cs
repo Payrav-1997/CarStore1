@@ -15,5 +15,6 @@ namespace CarStoreWebApp.Models
         public Status Status { get; set; }
         public Category Category { get; set; }
         public Model Model { get; set; }
+        public AboutModel About { get; set; }
     }
 }

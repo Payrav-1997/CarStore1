@@ -150,7 +150,7 @@ namespace CarStoreWebApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(maxLength: 15, nullable: true),
                     Adress = table.Column<string>(nullable: true),
                     ItemId = table.Column<int>(nullable: true)
                 },
@@ -174,6 +174,16 @@ namespace CarStoreWebApp.Migrations
                     { 2, "Mercedes" },
                     { 3, "BMW" },
                     { 4, "Lada" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Models",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Легковая" },
+                    { 2, "Грузовая" },
+                    { 3, "Электрический" }
                 });
 
             migrationBuilder.InsertData(

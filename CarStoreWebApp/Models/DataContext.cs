@@ -22,6 +22,7 @@ namespace CarStoreWebApp.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<AboutModel> Abouts { get; set; }
         protected override void OnModelCreating(ModelBuilder model)
         {
             //Добавляю статус машины
