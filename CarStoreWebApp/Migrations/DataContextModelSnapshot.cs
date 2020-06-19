@@ -19,12 +19,36 @@ namespace CarStoreWebApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CarStoreWebApp.Models.AboutModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Abouts");
+                });
+
             modelBuilder.Entity("CarStoreWebApp.Models.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AboutId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -48,6 +72,8 @@ namespace CarStoreWebApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AboutId");
 
                     b.HasIndex("CategoryId");
 
@@ -259,6 +285,10 @@ namespace CarStoreWebApp.Migrations
 
             modelBuilder.Entity("CarStoreWebApp.Models.Car", b =>
                 {
+                    b.HasOne("CarStoreWebApp.Models.AboutModel", "About")
+                        .WithMany()
+                        .HasForeignKey("AboutId");
+
                     b.HasOne("CarStoreWebApp.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");

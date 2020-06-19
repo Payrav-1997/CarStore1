@@ -8212,11 +8212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\Desktop\\CarStore\\CarStoreWebApp\\CarStoreWebApp.csproj",
+      "projectUniqueName": "D:\\CarStore\\CarStore\\CarStoreWebApp\\CarStoreWebApp.csproj",
       "projectName": "CarStoreWebApp",
-      "projectPath": "C:\\Users\\LENOVO\\Desktop\\CarStore\\CarStoreWebApp\\CarStoreWebApp.csproj",
+      "projectPath": "D:\\CarStore\\CarStore\\CarStoreWebApp\\CarStoreWebApp.csproj",
       "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\Desktop\\CarStore\\CarStoreWebApp\\obj\\",
+      "outputPath": "D:\\CarStore\\CarStore\\CarStoreWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",

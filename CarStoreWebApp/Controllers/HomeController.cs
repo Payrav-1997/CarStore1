@@ -36,5 +36,10 @@ namespace CarStoreWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult SearchByCattegory(int id)
+        {
+            var list = _context.Cars.Where(p => p.Category == _context.Categories.Where(p=>p.Id==id).FirstOrDefault()).Include(a => a.Model).Include(a => a.Category);
+            return View(list.ToList());
+        }
     }
 }

@@ -7,6 +7,21 @@ namespace CarStoreWebApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Abouts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Adress = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Abouts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -91,11 +106,18 @@ namespace CarStoreWebApp.Migrations
                     Desciption = table.Column<string>(nullable: true),
                     StatusId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true),
-                    ModelId = table.Column<int>(nullable: true)
+                    ModelId = table.Column<int>(nullable: true),
+                    AboutId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_Abouts_AboutId",
+                        column: x => x.AboutId,
+                        principalTable: "Abouts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cars_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -205,6 +227,11 @@ namespace CarStoreWebApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cars_AboutId",
+                table: "Cars",
+                column: "AboutId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cars_CategoryId",
                 table: "Cars",
                 column: "CategoryId");
@@ -253,6 +280,9 @@ namespace CarStoreWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Abouts");
 
             migrationBuilder.DropTable(
                 name: "Categories");

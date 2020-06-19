@@ -17,16 +17,14 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.Abauts = _context.Abouts.ToList();
-            var list = _context.Cars.OrderByDescending(p => p).Include(p => p.About).ToList();
+            var list = _context.Abouts.ToList();
             return View(list);
         }
         [HttpPost]
         public IActionResult Index(string about)
         {
             ViewBag.Abouts = _context.Abouts.ToList();
-            var list = _context.Cars.OrderByDescending(p => p).Include(p => p.About).Where(p => p.About.Email == about).ToList();
-            list = _context.Cars.OrderByDescending(p => p).Include(p => p.About).ToList();
+            var list = _context.Abouts.OrderByDescending(p => p).Where(p => p.Email == about).ToList();
             return View(list);
         }
 
@@ -38,8 +36,8 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult>Add(AboutModel model )
         {
-            _context.Abouts.Add(model);
-            _context.SaveChanges();
+           _context.Abouts.Add(model);
+           _context.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -53,22 +51,15 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
 
         public IActionResult Edit(int id)
         {
-            var model = _context.Cars.Include(p=>p.About).Single(p=>p.Id==id);
-            var AboutList = _context.Abouts.Where(p => p.Id == model.About.Id).ToList();
-            foreach (var item in _context.Abouts.ToList())
-            {
-                AboutList.Add(item);
-            }
-            ViewBag.Abouts = AboutList;
+            var model = _context.Abouts.Where(p=>p.Id==id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult>Edit(AboutModel model,int id)
-        {
-            var lastModel = _context.Abouts.Single(p => p.Id == model.Id);
-            lastModel.Adress = model.Adress;
-            lastModel.Email = model.Email;
-            lastModel.Phone = model.Phone;
+        {           
+            var lastModel = _context.Abouts.Where(p => p.Id == model.Id).FirstOrDefault();
+            model.Id=lastModel.Id;
+            _context.Entry(model).State=EntityState.Modified;
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
