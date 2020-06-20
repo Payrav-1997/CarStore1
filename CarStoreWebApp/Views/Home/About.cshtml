@@ -1,0 +1,26 @@
+﻿@model List<CarStoreWebApp.Models.AboutModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td><d>ID</d></td>
+            <td><d>Адресс</d></td>
+            <td><d>Почта</d></td>
+            <td><d>Номер телефона</d></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach (var item in Model)
+            {
+                <td><a asp-controller="Home" asp-action="About" asp-route-id="@item.Id">#</a></td>
+                <td>@item.Adress</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+            }
+
+        </tr>
+    </tbody>
+
+</table>
+

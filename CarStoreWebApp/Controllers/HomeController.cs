@@ -38,8 +38,14 @@ namespace CarStoreWebApp.Controllers
         }
         public IActionResult SearchByCattegory(int id)
         {
-            var list = _context.Cars.Where(p => p.Category == _context.Categories.Where(p=>p.Id==id).FirstOrDefault()).Include(a => a.Model).Include(a => a.Category);
+            var list = _context.Cars.Include(a => a.Category).Include(a => a.Model).Where(p => p.Model == _context.Models.Where(p => p.Id == id).FirstOrDefault());
             return View(list.ToList());
+        }
+        public IActionResult About(int id)
+        {
+            ViewBag.Abouts = _context.Abouts.ToList();
+            var list = _context.Abouts.ToList();
+            return View(list);
         }
     }
 }

@@ -24,13 +24,14 @@
                         <a class="nav-link" asp-action="Index" asp-controller="Home">Главный</a>
                     </li>
                     <div class="dropdown">
-                        <button class="btn brytn-seconda dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Категория
+                        <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span style="color:white">Категория</span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/Home/SearchByCattegory?id=1">Легковая</a>
-                            <a class="dropdown-item" href="/Home/SearchByCattegory?id=2">Грузовая</a>
                             <a class="dropdown-item" href="/Home/SearchByCattegory?id=3">Электрическая</a>
+                            <a class="dropdown-item" href="/Home/SearchByCattegory?id=2">Грузовая</a>
+
                         </div>
                     </div>
                     <li class="nav-item">
@@ -39,6 +40,10 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-action="Index" asp-controller="ClientCart">Корзина</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="About" asp-controller="Home">Наши контакты</a>
+                    </li>
+
                 </ul>
             </div>
             <div class="collapse navbar-collapse">

@@ -31,7 +31,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         {
             ViewBag.Categories = _context.Categories.ToList();
             var list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).Where(p => p.Category.Name == category).ToList();
-                list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
+            list = _context.Cars.OrderByDescending(p => p).Include(p => p.Category).ToList();
             return View(list);
         }
         public IActionResult Add()
@@ -45,7 +45,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
 
         //Добавление машины
         [HttpPost]
-        public async Task<IActionResult> Add(Car model,int CId,int SId,int MId, IFormFile file)
+        public async Task<IActionResult> Add(Car model, int CId, int SId, int MId, IFormFile file)
         {
             string dirpath = Path.GetFullPath("wwwroot/img/");
             string path = dirpath + file.FileName;
@@ -77,7 +77,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         //Изменение машины
         public IActionResult Edit(int id)
         {
-            var model = _context.Cars.Include(p => p.Category).Include(p=>p.Status).Include(p=>p.Model).Single(p => p.Id == id);
+            var model = _context.Cars.Include(p => p.Category).Include(p => p.Status).Include(p => p.Model).Single(p => p.Id == id);
             var CategoryList = _context.Categories.Where(p => p.Id == model.Category.Id).ToList();
             var StatusList = _context.Statuses.Where(p => p.Id == model.Status.Id).ToList();
             var ModelList = _context.Models.Where(p => p.Id == model.Model.Id).ToList();
@@ -101,22 +101,25 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Car model, int id, IFormFile file)
+        public async Task<IActionResult> Edit(Car model, int id, int SId, int MId, IFormFile file)
         {
             var lastmodel = _context.Cars.Single(p => p.Id == model.Id);
-            if ("/img/" + file.FileName != lastmodel.Img)
+            if (file != null)
             {
-                string dirpath = Path.GetFullPath("wwwroot/img/");
-                string path = dirpath + file.FileName;
-                using (var stream = System.IO.File.Create(path))
+                if ("/img/" + file.FileName != lastmodel.Img)
                 {
-                    file.CopyTo(stream);
+                    string dirpath = Path.GetFullPath("wwwroot/img/");
+                    string path = dirpath + file.FileName;
+                    using (var stream = System.IO.File.Create(path))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    model.Img = "/img/" + file.FileName;
                 }
-                model.Img = "/img/" + file.FileName;
             }
-            var Category = _context.Categories.Single(p => p.Id == id);
-            var status = _context.Statuses.First(p => p.Id == model.Status.Id);
-            var Model = _context.Models.First(p => p.Id == model.Model.Id);
+            var Category = await _context.Categories.SingleAsync(p => p.Id == id);
+            var Model = await _context.Models.FirstAsync(c => c.Id == MId);
+            var status = await _context.Statuses.FirstAsync(c => c.Id == SId);
             lastmodel.Name = model.Name;
             lastmodel.Price = model.Price;
             lastmodel.Img = model.Img;
@@ -130,7 +133,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         //Для Покупки
         public IActionResult GetOrders()
         {
-            var list = _context.Orders.Include(p=>p.Item).Include(p=>p.Item.Item).ToList();
+            var list = _context.Orders.Include(p => p.Item).Include(p => p.Item.Item).ToList();
             return View(list);
         }
         //Для удаение покупки
@@ -138,7 +141,7 @@ namespace CarStoreWebApp.Areas.Admin.Controllers
         {
             _context.Orders.Remove(_context.Orders.Where(p => p.Id == id).FirstOrDefault());
             _context.SaveChanges();
-            return RedirectToAction("GetOrders","Car");
+            return RedirectToAction("GetOrders", "Car");
         }
     }
 }

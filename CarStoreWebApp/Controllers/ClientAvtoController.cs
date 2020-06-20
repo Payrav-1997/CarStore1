@@ -30,5 +30,6 @@ namespace CarStoreWebApp.Controllers
             var car = _context.Cars.Include(c=>c.Status).Include(c=>c.Model).First(c=> c.Id == id);
             return View(car);
         }
+        
     }
 }

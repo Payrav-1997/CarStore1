@@ -12,18 +12,18 @@
                 <div class="container">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" name="Name" class="form-control"/>
+                        <input type="text" name="Name" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label>Номер</label>
-                        <input type="number" name="Phone" class="form-control"/>
+                        <input type="number" name="Phone" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label>Адресс</label>
-                        <input type="text" name="Adress" class="form-control"/>
+                        <input type="text" name="Adress" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn form-control btn-success" value="Оформить"/>
+                        <input type="submit" class="btn form-control btn-success" value="Оформить" />
                     </div>
                 </div>
             </form>
@@ -42,15 +42,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var x in Model)
-        {
+        @{
+            double res = 0;
+            foreach (var x in Model)
+            {
+                res += x.Item.Price*x.Caunt;
 
+                <tr>
+                    <td><img src="@x.Item.Img" style="width:150px" /></td>
+                    <td>@x.Item.Category@x.Item.Name</td>
+                    <td>@x.Caunt</td>
+                    <td>@x.Item.Price сом</td>
+                    <td><a class="btn btn-danger" asp-action="Delete" asp-controller="ClientCart" asp-route-id="@x.Id" id="Delete">Удалить</a></td>
+                </tr>
+            }
             <tr>
-                <td><img src="@x.Item.Img" style="width:150px" /></td>
-                <td>@x.Item.Category@x.Item.Name</td>
-                <td>@x.Caunt</td>
-                <td>@x.Item.Price сом</td>
-                <td><a class="btn btn-danger" asp-action="Delete" asp-controller="ClientCart" asp-route-id="@x.Id" id="Delete">Удалить</a></td>
+                <td colspan="6">Общая сумма:@res сом</td>
             </tr>
         }
     </tbody>
